@@ -1,0 +1,33 @@
+entity Config_user_key {
+	id Int,
+    platform String,
+    api_key String,
+    secret_key String,
+    create_by String ,
+    create_date Date,
+    update_by String,
+    update_date Date,
+    remarks String,
+    del_flag Int
+}
+
+entity Config_basic_info{
+	id Int,
+    config_code String,
+    config_name String,
+    config_value String,
+    parent_id String,
+    config_type_name String,
+    config_type String,
+    create_by String,
+    create_date Date,
+    update_by String,
+    update_date Date,
+    remarks String,
+    del_flag Int
+}
+
+
+
+
+
