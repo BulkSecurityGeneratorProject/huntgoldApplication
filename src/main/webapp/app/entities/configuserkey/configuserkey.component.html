@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span>Configuserkeys</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-configuserkey" [routerLink]="['/configuserkey/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Configuserkey
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="configuserkeys">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Platform</span></th>
+            <th><span>Apikey</span></th>
+            <th><span>Secretkey</span></th>
+            <th><span>Createby</span></th>
+            <th><span>Createdate</span></th>
+            <th><span>Updateby</span></th>
+            <th><span>Updatedate</span></th>
+            <th><span>Remarks</span></th>
+            <th><span>Delflag</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let configuserkey of configuserkeys ;trackBy: trackId">
+                <td><a [routerLink]="['/configuserkey', configuserkey.id, 'view' ]">{{configuserkey.id}}</a></td>
+                <td>{{configuserkey.platform}}</td>
+                <td>{{configuserkey.apikey}}</td>
+                <td>{{configuserkey.secretkey}}</td>
+                <td>{{configuserkey.createby}}</td>
+                <td>{{configuserkey.createdate | date:'medium'}}</td>
+                <td>{{configuserkey.updateby}}</td>
+                <td>{{configuserkey.updatedate | date:'medium'}}</td>
+                <td>{{configuserkey.remarks}}</td>
+                <td>{{configuserkey.delflag}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/configuserkey', configuserkey.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/configuserkey', configuserkey.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'configuserkey/'+ configuserkey.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

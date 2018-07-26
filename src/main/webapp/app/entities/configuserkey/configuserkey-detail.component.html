@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="configuserkey">
+            <h2><span>Configuserkey</span> {{configuserkey.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Platform</span></dt>
+                <dd>
+                    <span>{{configuserkey.platform}}</span>
+                </dd>
+                <dt><span>Apikey</span></dt>
+                <dd>
+                    <span>{{configuserkey.apikey}}</span>
+                </dd>
+                <dt><span>Secretkey</span></dt>
+                <dd>
+                    <span>{{configuserkey.secretkey}}</span>
+                </dd>
+                <dt><span>Createby</span></dt>
+                <dd>
+                    <span>{{configuserkey.createby}}</span>
+                </dd>
+                <dt><span>Createdate</span></dt>
+                <dd>
+                    <span>{{configuserkey.createdate}}</span>
+                </dd>
+                <dt><span>Updateby</span></dt>
+                <dd>
+                    <span>{{configuserkey.updateby}}</span>
+                </dd>
+                <dt><span>Updatedate</span></dt>
+                <dd>
+                    <span>{{configuserkey.updatedate}}</span>
+                </dd>
+                <dt><span>Remarks</span></dt>
+                <dd>
+                    <span>{{configuserkey.remarks}}</span>
+                </dd>
+                <dt><span>Delflag</span></dt>
+                <dd>
+                    <span>{{configuserkey.delflag}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/configuserkey', configuserkey.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

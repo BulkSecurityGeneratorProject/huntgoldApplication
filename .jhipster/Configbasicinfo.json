@@ -1,0 +1,63 @@
+{
+    "name": "Configbasicinfo",
+    "fields": [
+        {
+            "fieldName": "configcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "configname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "configvalue",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "parentid",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "configtypename",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "configtype",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createby",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updateby",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "delflag",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180726145057",
+    "entityTableName": "configbasicinfo",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

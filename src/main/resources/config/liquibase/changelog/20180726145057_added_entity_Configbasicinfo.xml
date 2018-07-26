@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Configbasicinfo.
+    -->
+    <changeSet id="20180726145057-1" author="jhipster">
+        <createTable tableName="configbasicinfo">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="configcode" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="configname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="configvalue" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="parentid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="configtypename" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="configtype" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="createby" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="createdate" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="updateby" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="updatedate" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="remarks" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="delflag" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="configbasicinfo" columnName="createdate" columnDataType="datetime"/>
+        <dropDefaultValue tableName="configbasicinfo" columnName="updatedate" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

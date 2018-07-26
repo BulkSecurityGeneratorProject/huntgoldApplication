@@ -1,0 +1,76 @@
+<div>
+    <h2 id="page-heading">
+        <span>Configbasicinfos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-configbasicinfo" [routerLink]="['/configbasicinfo/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Configbasicinfo
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="configbasicinfos">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Configcode</span></th>
+            <th><span>Configname</span></th>
+            <th><span>Configvalue</span></th>
+            <th><span>Parentid</span></th>
+            <th><span>Configtypename</span></th>
+            <th><span>Configtype</span></th>
+            <th><span>Createby</span></th>
+            <th><span>Createdate</span></th>
+            <th><span>Updateby</span></th>
+            <th><span>Updatedate</span></th>
+            <th><span>Remarks</span></th>
+            <th><span>Delflag</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let configbasicinfo of configbasicinfos ;trackBy: trackId">
+                <td><a [routerLink]="['/configbasicinfo', configbasicinfo.id, 'view' ]">{{configbasicinfo.id}}</a></td>
+                <td>{{configbasicinfo.configcode}}</td>
+                <td>{{configbasicinfo.configname}}</td>
+                <td>{{configbasicinfo.configvalue}}</td>
+                <td>{{configbasicinfo.parentid}}</td>
+                <td>{{configbasicinfo.configtypename}}</td>
+                <td>{{configbasicinfo.configtype}}</td>
+                <td>{{configbasicinfo.createby}}</td>
+                <td>{{configbasicinfo.createdate | date:'medium'}}</td>
+                <td>{{configbasicinfo.updateby}}</td>
+                <td>{{configbasicinfo.updatedate | date:'medium'}}</td>
+                <td>{{configbasicinfo.remarks}}</td>
+                <td>{{configbasicinfo.delflag}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/configbasicinfo', configbasicinfo.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/configbasicinfo', configbasicinfo.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'configbasicinfo/'+ configbasicinfo.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

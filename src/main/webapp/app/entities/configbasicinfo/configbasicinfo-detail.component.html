@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="configbasicinfo">
+            <h2><span>Configbasicinfo</span> {{configbasicinfo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Configcode</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.configcode}}</span>
+                </dd>
+                <dt><span>Configname</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.configname}}</span>
+                </dd>
+                <dt><span>Configvalue</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.configvalue}}</span>
+                </dd>
+                <dt><span>Parentid</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.parentid}}</span>
+                </dd>
+                <dt><span>Configtypename</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.configtypename}}</span>
+                </dd>
+                <dt><span>Configtype</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.configtype}}</span>
+                </dd>
+                <dt><span>Createby</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.createby}}</span>
+                </dd>
+                <dt><span>Createdate</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.createdate}}</span>
+                </dd>
+                <dt><span>Updateby</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.updateby}}</span>
+                </dd>
+                <dt><span>Updatedate</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.updatedate}}</span>
+                </dd>
+                <dt><span>Remarks</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.remarks}}</span>
+                </dd>
+                <dt><span>Delflag</span></dt>
+                <dd>
+                    <span>{{configbasicinfo.delflag}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/configbasicinfo', configbasicinfo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

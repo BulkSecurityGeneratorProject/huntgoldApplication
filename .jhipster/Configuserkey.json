@@ -1,0 +1,51 @@
+{
+    "name": "Configuserkey",
+    "fields": [
+        {
+            "fieldName": "platform",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "apikey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "secretkey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createby",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updateby",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "delflag",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180726145056",
+    "entityTableName": "configuserkey",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
