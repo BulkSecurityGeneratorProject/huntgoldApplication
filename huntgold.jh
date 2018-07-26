@@ -1,0 +1,33 @@
+entity Configuserkey {
+	id Integer,
+    platform String,
+    apikey String,
+    secretkey String,
+    createby String ,
+    createdate Instant,
+    updateby String,
+    updatedate Instant,
+    remarks String,
+    delflag Integer
+}
+
+entity Configbasicinfo{
+	id Integer,
+    configcode String,
+    configname String,
+    configvalue String,
+    parentid String,
+    configtypename String,
+    configtype String,
+    createby String,
+    createdate Instant,
+    updateby String,
+    updatedate Instant,
+    remarks String,
+    delflag Integer
+}
+
+
+
+
+
