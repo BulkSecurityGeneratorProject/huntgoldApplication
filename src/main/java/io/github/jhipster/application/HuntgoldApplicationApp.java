@@ -3,14 +3,18 @@ package io.github.jhipster.application;
 import io.github.jhipster.application.config.ApplicationProperties;
 import io.github.jhipster.application.config.DefaultProfileUtil;
 
+import io.github.jhipster.application.kafka.KafkaSender;
+import io.github.jhipster.application.task.WebSocketTask;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
@@ -26,25 +30,28 @@ public class HuntgoldApplicationApp {
 
     private final Environment env;
 
+
+
     public HuntgoldApplicationApp(Environment env) {
         this.env = env;
     }
 
+
     /**
-     * Initializes huntgoldApplication.
-     * <p>
-     * Spring profiles can be configured with a program arguments --spring.profiles.active=your-active-profile
-     * <p>
-     * You can find more information on how profiles work with JHipster on <a href="https://www.jhipster.tech/profiles/">https://www.jhipster.tech/profiles/</a>.
+     * Initializes huntgoldApplication. <p> Spring profiles can be configured with a program arguments
+     * --spring.profiles.active=your-active-profile <p> You can find more information on how profiles
+     * work with JHipster on <a href="https://www.jhipster.tech/profiles/">https://www.jhipster.tech/profiles/</a>.
      */
     @PostConstruct
     public void initApplication() {
         Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
-        if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
+        if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles
+            .contains(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
             log.error("You have misconfigured your application! It should not run " +
                 "with both the 'dev' and 'prod' profiles at the same time.");
         }
-        if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_CLOUD)) {
+        if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles
+            .contains(JHipsterConstants.SPRING_PROFILE_CLOUD)) {
             log.error("You have misconfigured your application! It should not " +
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
@@ -58,7 +65,9 @@ public class HuntgoldApplicationApp {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(HuntgoldApplicationApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
-        Environment env = app.run(args).getEnvironment();
+
+        ConfigurableApplicationContext context = app.run(args);
+        Environment env = context.getEnvironment();
         String protocol = "http";
         if (env.getProperty("server.ssl.key-store") != null) {
             protocol = "https";
@@ -81,5 +90,11 @@ public class HuntgoldApplicationApp {
             hostAddress,
             env.getProperty("server.port"),
             env.getActiveProfiles());
+
+
+        WebSocketTask webSocketTask = context.getBean(WebSocketTask.class);
+        webSocketTask.startOKex();
+
+
     }
 }
