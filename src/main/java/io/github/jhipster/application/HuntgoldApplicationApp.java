@@ -93,7 +93,7 @@ public class HuntgoldApplicationApp {
 
 
         WebSocketTask webSocketTask = context.getBean(WebSocketTask.class);
-        webSocketTask.startOKex();
+    //    webSocketTask.startOKex();
 
 
     }

@@ -6,6 +6,8 @@ import io.github.jhipster.application.repository.ConfiguserkeyRepository;
 import io.github.jhipster.application.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.application.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.util.HashMap;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +40,18 @@ public class ConfiguserkeyResource {
      * POST  /configuserkeys : Create a new configuserkey.
      *
      * @param configuserkey the configuserkey to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new configuserkey, or with status 400 (Bad Request) if the configuserkey has already an ID
+     * @return the ResponseEntity with status 201 (Created) and with body the new configuserkey, or
+     * with status 400 (Bad Request) if the configuserkey has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/configuserkeys")
     @Timed
-    public ResponseEntity<Configuserkey> createConfiguserkey(@RequestBody Configuserkey configuserkey) throws URISyntaxException {
+    public ResponseEntity<Configuserkey> createConfiguserkey(
+        @RequestBody Configuserkey configuserkey) throws URISyntaxException {
         log.debug("REST request to save Configuserkey : {}", configuserkey);
         if (configuserkey.getId() != null) {
-            throw new BadRequestAlertException("A new configuserkey cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new configuserkey cannot already have an ID",
+                ENTITY_NAME, "idexists");
         }
         Configuserkey result = configuserkeyRepository.save(configuserkey);
         return ResponseEntity.created(new URI("/api/configuserkeys/" + result.getId()))
@@ -58,21 +63,23 @@ public class ConfiguserkeyResource {
      * PUT  /configuserkeys : Updates an existing configuserkey.
      *
      * @param configuserkey the configuserkey to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated configuserkey,
-     * or with status 400 (Bad Request) if the configuserkey is not valid,
-     * or with status 500 (Internal Server Error) if the configuserkey couldn't be updated
+     * @return the ResponseEntity with status 200 (OK) and with body the updated configuserkey, or
+     * with status 400 (Bad Request) if the configuserkey is not valid, or with status 500 (Internal
+     * Server Error) if the configuserkey couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/configuserkeys")
     @Timed
-    public ResponseEntity<Configuserkey> updateConfiguserkey(@RequestBody Configuserkey configuserkey) throws URISyntaxException {
+    public ResponseEntity<Configuserkey> updateConfiguserkey(
+        @RequestBody Configuserkey configuserkey) throws URISyntaxException {
         log.debug("REST request to update Configuserkey : {}", configuserkey);
         if (configuserkey.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Configuserkey result = configuserkeyRepository.save(configuserkey);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, configuserkey.getId().toString()))
+            .headers(
+                HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, configuserkey.getId().toString()))
             .body(result);
     }
 
@@ -83,16 +90,24 @@ public class ConfiguserkeyResource {
      */
     @GetMapping("/configuserkeys")
     @Timed
-    public List<Configuserkey> getAllConfiguserkeys() {
+    public Map<String, Object> getAllConfiguserkeys() {
         log.debug("REST request to get all Configuserkeys");
-        return configuserkeyRepository.findAll();
+        List<Configuserkey> result = configuserkeyRepository.findAll();
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", result.size());
+        map.put("data", result);
+        return map;
     }
 
     /**
      * GET  /configuserkeys/:id : get the "id" configuserkey.
      *
      * @param id the id of the configuserkey to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the configuserkey, or with status 404 (Not Found)
+     * @return the ResponseEntity with status 200 (OK) and with body the configuserkey, or with status
+     * 404 (Not Found)
      */
     @GetMapping("/configuserkeys/{id}")
     @Timed
@@ -114,6 +129,7 @@ public class ConfiguserkeyResource {
         log.debug("REST request to delete Configuserkey : {}", id);
 
         configuserkeyRepository.deleteById(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }
