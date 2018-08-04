@@ -1,14 +1,28 @@
 package io.github.jhipster.application.task;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingExchangeFactory;
 import info.bitrich.xchangestream.okcoin.OkExStreamingExchange;
+import io.github.jhipster.application.Exchange.OkExchange;
 import io.github.jhipster.application.kafka.KafkaSender;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.knowm.xchange.Exchange;
+import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.okcoin.FuturesContract;
+import org.knowm.xchange.okcoin.OkCoinExchange;
+import org.knowm.xchange.okcoin.service.OkCoinFuturesMarketDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,29 +30,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class WebSocketTask {
-
     private final Logger log = LoggerFactory.getLogger(WebSocketTask.class);
-
     private final static String TOPIC_OKEX = "topic_okex";
-
+    private final static String TOPIC_KLINE = "topic_kline";
+    private final static String TOPIC_FUTURES_TIKER = "topic_kline";
+    private final static String TOPIC_FUTURES_TRADE = "topic_kline";
 
     @Autowired
     KafkaSender sender;
-
-
-    // @Scheduled(fixedRate = 5000)
-    public void test() {
-        for (int i = 0; i < 3; i++) {
-            //调用消息发送类中的消息发送方法
-            //       sender.send();
-
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public void startOKex() {
         log.info("startOKex task start!!!");
@@ -48,7 +47,6 @@ public class WebSocketTask {
 
         // Connect to the Exchange WebSocket API. Blocking wait for the connection.
         exchange.connect().blockingAwait();
-
         System.out.println("isalive :" + exchange.isAlive());
 
         exchange.getStreamingMarketDataService()

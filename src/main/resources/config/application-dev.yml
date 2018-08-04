@@ -15,7 +15,7 @@
 
 logging:
     level:
-        ROOT: DEBUG
+        ROOT: INFO
         io.github.jhipster: DEBUG
         io.github.jhipster.application: DEBUG
 
@@ -120,6 +120,7 @@ jhipster:
         logs: # Reports Dropwizard metrics in the logs
             enabled: false
             report-frequency: 60 # in seconds
+
     logging:
         logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
             enabled: false
