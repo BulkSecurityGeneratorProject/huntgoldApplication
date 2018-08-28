@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
@@ -93,8 +94,9 @@ public class HuntgoldApplicationApp {
 
 
         WebSocketTask webSocketTask = context.getBean(WebSocketTask.class);
-    //    webSocketTask.startOKex();
+       // webSocketTask.startOKex();
 
 
     }
+
 }

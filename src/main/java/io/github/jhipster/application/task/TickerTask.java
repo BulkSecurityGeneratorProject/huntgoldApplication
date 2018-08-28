@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * Created by lujango on 2018/8/4.
  * 行情
  */
-@Component
+//@Component
 public class TickerTask {
 
     private final Logger log = LoggerFactory.getLogger(TickerTask.class);

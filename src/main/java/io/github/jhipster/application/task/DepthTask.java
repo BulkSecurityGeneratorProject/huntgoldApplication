@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * Created by lujango on 2018/8/4.
  * 交易深度获取
  */
-@Component
+//@Component
 public class DepthTask {
 
     private final Logger log = LoggerFactory.getLogger(DepthTask.class);
@@ -33,7 +33,10 @@ public class DepthTask {
                 .getFuturesDepth(CurrencyPair.DASH_BTC, FuturesContract.Quarter);
 
             log.info("okCoinDepth" + okCoinDepth.toString());
-            sender.send(TOPIC_KLINE, okCoinDepth.toString());
+
+
+
+         //   sender.send(TOPIC_KLINE, okCoinDepth.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -49,20 +49,34 @@ public class WebSocketTask {
         exchange.connect().blockingAwait();
         System.out.println("isalive :" + exchange.isAlive());
 
-        exchange.getStreamingMarketDataService()
+      /*  exchange.getStreamingMarketDataService()
             .getTrades(CurrencyPair.ETH_BTC)
             .subscribe(trade -> {
-                sender.send(TOPIC_OKEX, trade.toString());
+               // sender.send(TOPIC_OKEX, trade.toString());
+
+                log.info(trade.toString());
+            }, throwable -> {
+                log.error("Error in subscribing trades." + throwable.toString());
+            });*/
+
+        exchange.getStreamingMarketDataService()
+            .getTicker(CurrencyPair.BTC_USDT)
+            .subscribe(ticker -> {
+                // sender.send(TOPIC_OKEX, trade.toString());
+
+                log.info(ticker.toString());
             }, throwable -> {
                 log.error("Error in subscribing trades." + throwable.toString());
             });
 
-        exchange.getStreamingMarketDataService()
+
+       /* exchange.getStreamingMarketDataService()
             .getTrades(CurrencyPair.EOS_BTC)
             .subscribe(trade -> {
-                sender.send(TOPIC_OKEX, trade.toString());
+               // sender.send(TOPIC_OKEX, trade.toString());
+                log.info( trade.toString());
             }, throwable -> {
                 log.error("Error in subscribing trades." + throwable.toString());
-            });
+            });*/
     }
 }

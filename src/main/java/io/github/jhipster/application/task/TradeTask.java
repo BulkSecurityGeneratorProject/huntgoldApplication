@@ -9,13 +9,17 @@ import org.knowm.xchange.okcoin.dto.marketdata.OkCoinTrade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by lujango on 2018/8/4.
- *已交易
+ * 已交易
  */
+
 public class TradeTask {
+
 
     private final Logger log = LoggerFactory.getLogger(TickerTask.class);
     private final static String TOPIC_TRADE = "topic_trade";
@@ -24,14 +28,20 @@ public class TradeTask {
     @Autowired
     OkExchange okExchange;
 
+
+
     @Scheduled(fixedRate = 10000)
     public void getFuturesDepth() {
         try {
-            OkCoinTrade[] okCoinTrades = okExchange
-                .getFutureService()
-                .getFuturesTrades(CurrencyPair.DASH_BTC, FuturesContract.Quarter);
+            FuturesContract[] futuresContracts = FuturesContract.values();
+            //循环拉取行情
+            for (FuturesContract futures : futuresContracts) {
 
-            sender.send(TOPIC_TRADE, okCoinTrades.toString());
+                OkCoinTrade[] okCoinTrades = okExchange
+                    .getFutureService()
+                    .getFuturesTrades(CurrencyPair.DASH_BTC, futures);
+                sender.send(TOPIC_TRADE, okCoinTrades.toString());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

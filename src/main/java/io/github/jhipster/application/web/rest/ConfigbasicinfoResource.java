@@ -2,10 +2,13 @@ package io.github.jhipster.application.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.application.domain.Configbasicinfo;
+import io.github.jhipster.application.domain.Configuserkey;
 import io.github.jhipster.application.repository.ConfigbasicinfoRepository;
 import io.github.jhipster.application.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.application.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.util.HashMap;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +46,7 @@ public class ConfigbasicinfoResource {
      */
     @PostMapping("/configbasicinfos")
     @Timed
-    public ResponseEntity<Configbasicinfo> createConfigbasicinfo(@RequestBody Configbasicinfo configbasicinfo) throws URISyntaxException {
+    public ResponseEntity<Configbasicinfo> createConfigbasicinfo(@RequestBody(required = false) Configbasicinfo configbasicinfo) throws URISyntaxException {
         log.debug("REST request to save Configbasicinfo : {}", configbasicinfo);
         if (configbasicinfo.getId() != null) {
             throw new BadRequestAlertException("A new configbasicinfo cannot already have an ID", ENTITY_NAME, "idexists");
@@ -83,9 +86,16 @@ public class ConfigbasicinfoResource {
      */
     @GetMapping("/configbasicinfos")
     @Timed
-    public List<Configbasicinfo> getAllConfigbasicinfos() {
+    public Map<String ,Object> getAllConfigbasicinfos() {
         log.debug("REST request to get all Configbasicinfos");
-        return configbasicinfoRepository.findAll();
+
+        List<Configbasicinfo> result = configbasicinfoRepository.findAll();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", result.size());
+        map.put("data", result);
+        return map;
     }
 
     /**

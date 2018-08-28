@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import io.github.jhipster.application.Exchange.OkExchange;
 import io.github.jhipster.application.kafka.KafkaSender;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class KlineTask {
 
     private final Logger log = LoggerFactory.getLogger(KlineTask.class);
     private final static String TOPIC_KLINE = "topic_kline";
-
+    private final static CurrencyPair[] needCurrencyPairs = {CurrencyPair.DASH_BTC};
 
     @Autowired
     KafkaSender sender;
@@ -28,13 +29,16 @@ public class KlineTask {
     @Autowired
     OkExchange okExchange;
 
+    @PostConstruct
     @Scheduled(fixedRate = 30000)
     public void get1Klines() {
         log.info("getKlines 1min ");
         try {
+
             List<Object[]> resultList = okExchange.getFutureService()
                 .getKlines(CurrencyPair.BTC_USDT, "1min");
-            sender.send(TOPIC_KLINE, "1min" + new Gson().toJson(resultList.get(0)));
+           // sender.send(TOPIC_KLINE, "1min" + new Gson().toJson(resultList.get(0)));
+            log.info("1min"+new Gson().toJson(resultList.get(0)));
         } catch (Exception e) {
             e.printStackTrace();
         }
